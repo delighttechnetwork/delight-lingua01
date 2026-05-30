@@ -1,0 +1,9 @@
+# Delight Lingua
+
+> Instant translation for text, voice, and images across 50+ languages.
+
+## Pages
+- [Home](/): Overview of Delight Lingua's translation features
+- [Pricing](/pricing): Free and Pro plan details
+- [Sign in](/login): Sign in to your account
+- [Sign up](/signup): Create a new account
