@@ -40,8 +40,7 @@ async function callAI(messages: ChatMessage[], opts?: { json?: boolean }): Promi
   return json.choices?.[0]?.message?.content ?? "";
 }
 
-async function checkAndIncrementQuota(supabase: ReturnType<typeof Object>, userId: string) {
-  // @ts-expect-error supabase is typed as the auth-middleware client
+async function checkAndIncrementQuota(supabase: any, userId: string) {
   const { data: profile } = await supabase.from("profiles").select("is_premium, daily_count, count_reset_at").eq("id", userId).single();
   if (!profile) throw new Error("Profile not found");
   if (profile.is_premium) return;
@@ -55,7 +54,6 @@ async function checkAndIncrementQuota(supabase: ReturnType<typeof Object>, userI
     throw new Error(`Daily limit of ${FREE_DAILY_LIMIT} translations reached. Upgrade to Pro for unlimited translations.`);
   }
 
-  // @ts-expect-error
   await supabase.from("profiles").update({
     daily_count: nextCount,
     count_reset_at: sameDay ? profile.count_reset_at : now.toISOString(),
