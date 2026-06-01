@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Languages, Mic, Camera, Sparkles } from "lucide-react";
+import logo from "@/assets/logo.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,7 +17,10 @@ function Landing() {
     <div className="min-h-screen bg-ui-bg">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
-          <Link to="/" className="font-display italic text-xl sm:text-2xl text-brand shrink-0">Delight Lingua</Link>
+          <Link to="/" className="flex items-center gap-2 font-display italic text-xl sm:text-2xl text-brand shrink-0">
+            <img src={logo} alt="Delight Lingua" className="h-8 w-8 rounded-md object-cover" />
+            <span>Delight Lingua</span>
+          </Link>
           <nav className="flex items-center gap-1 sm:gap-2">
             <Link to="/pricing" className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900">Pricing</Link>
             <Link to="/login" className="px-3 sm:px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</Link>

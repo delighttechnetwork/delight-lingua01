@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { toast } from "sonner";
+import logo from "@/assets/logo.webp";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -17,7 +18,10 @@ function PricingPage() {
     <div className="min-h-screen bg-ui-bg">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display italic text-2xl text-brand">Delight Lingua</Link>
+          <Link to="/" className="flex items-center gap-2 font-display italic text-2xl text-brand">
+            <img src={logo} alt="Delight Lingua" className="h-8 w-8 rounded-md object-cover" />
+            <span>Delight Lingua</span>
+          </Link>
           <nav className="flex items-center gap-2">
             <Link to="/login" className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</Link>
             <Link to="/signup" className="px-4 py-2 text-sm font-medium rounded-full bg-slate-900 text-white">Get started</Link>
