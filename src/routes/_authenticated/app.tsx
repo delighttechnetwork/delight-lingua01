@@ -83,12 +83,23 @@ function AppPage() {
   };
 
   const onSpeak = (text: string, lang: string) => {
-    if (!text || typeof window === "undefined") return;
+    if (!text || typeof window === "undefined" || !window.speechSynthesis) return;
+    // Create utterance synchronously within the user gesture (required by iOS/mobile Safari)
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
+    u.lang = lang === "auto" ? "en" : lang;
+    u.rate = 1;
+    u.pitch = 1;
+    try {
+      // iOS sometimes leaves the queue in a paused state
+      window.speechSynthesis.resume();
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch (err) {
+      console.error("Speech synthesis failed:", err);
+      toast.error("Speech not available on this device.");
+    }
   };
+
 
   const onFavorite = async () => {
     if (!lastId) return;
