@@ -46,16 +46,16 @@ function Landing() {
           </div>
         </section>
 
-        <section className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-3 gap-4">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             <FeatureCard icon={<Languages className="size-5" />} title="Text translation" desc="Auto-detect any source language and translate into 50+ targets in under a second." />
             <FeatureCard icon={<Mic className="size-5" />} title="Voice translation" desc="Speak naturally. Get accurate transcripts and translations with audio playback." />
             <FeatureCard icon={<Camera className="size-5" />} title="Image translation" desc="Snap a menu, sign, or document. Extract text and translate instantly." />
           </div>
         </section>
 
-        <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="font-display text-4xl md:text-5xl text-slate-900 tracking-tight">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight">
             Ready when you <span className="italic text-brand">are</span>.
           </h2>
           <p className="mt-4 text-slate-500 text-pretty">500 free translations per day. Upgrade anytime for unlimited.</p>
@@ -66,7 +66,7 @@ function Landing() {
       </main>
 
       <footer className="border-t border-border bg-background py-8">
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between text-xs text-slate-500">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <span>© 2026 Delight Lingua</span>
           <div className="flex gap-6">
             <Link to="/pricing">Pricing</Link>
