@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
+import logo from "@/assets/logo.webp";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -75,7 +76,10 @@ export function AuthShell({ title, subtitle, children }: { title: string; subtit
   return (
     <div className="min-h-screen bg-ui-bg flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <Link to="/" className="block text-center font-display italic text-3xl text-brand mb-8">Delight Lingua</Link>
+        <Link to="/" className="flex flex-col items-center gap-3 mb-8">
+          <img src={logo} alt="Delight Lingua" className="h-16 w-16 rounded-xl object-cover" />
+          <span className="font-display italic text-3xl text-brand">Delight Lingua</span>
+        </Link>
         <div className="bg-background rounded-2xl border border-border p-8 shadow-sm">
           <h1 className="font-display text-3xl text-slate-900 text-center">{title}</h1>
           <p className="text-center text-sm text-slate-500 mt-1 mb-6">{subtitle}</p>

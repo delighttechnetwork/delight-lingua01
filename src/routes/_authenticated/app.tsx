@@ -16,6 +16,7 @@ import {
 import { LANGUAGES, TRANSLATABLE_LANGUAGES, getLanguageName } from "@/lib/languages";
 import { useSignOut, useAuth } from "@/hooks/use-auth";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import logo from "@/assets/logo.webp";
 
 const historyQuery = queryOptions({ queryKey: ["history"], queryFn: () => getHistory() });
 const profileQuery = queryOptions({ queryKey: ["profile"], queryFn: () => getProfile() });
@@ -143,7 +144,10 @@ function AppPage() {
   const sidebar = (
     <>
       <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-        <Link to="/" className="font-display italic text-2xl text-brand">Delight Lingua</Link>
+        <Link to="/" className="flex items-center gap-2 font-display italic text-2xl text-brand">
+          <img src={logo} alt="Delight Lingua" className="h-8 w-8 rounded-md object-cover" />
+          <span>Delight Lingua</span>
+        </Link>
         <div className="size-8 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center">
           <div className="size-2 rounded-full bg-brand" />
         </div>
@@ -228,7 +232,10 @@ function AppPage() {
                 {sidebar}
               </SheetContent>
             </Sheet>
-            <Link to="/" className="lg:hidden font-display italic text-xl text-brand truncate">Delight Lingua</Link>
+            <Link to="/" className="lg:hidden flex items-center gap-2 font-display italic text-xl text-brand truncate">
+              <img src={logo} alt="Delight Lingua" className="h-7 w-7 rounded-md object-cover shrink-0" />
+              <span className="truncate">Delight Lingua</span>
+            </Link>
             <nav className="hidden lg:flex items-center gap-1">
               <button className="px-4 py-1.5 text-sm font-medium rounded-full bg-slate-900 text-white">Translate</button>
             </nav>
