@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState, useRef, useEffect } from "react";
-import { ArrowLeftRight, Copy, Volume2, Star, X, Mic, Square, Upload, LogOut, Trash2 } from "lucide-react";
+import { ArrowLeftRight, Copy, Volume2, Star, X, Mic, Square, Upload, LogOut, Trash2, Menu } from "lucide-react";
 import { toast } from "sonner";
 import {
   translateText,
@@ -15,6 +15,8 @@ import {
 } from "@/lib/translation.functions";
 import { LANGUAGES, TRANSLATABLE_LANGUAGES, getLanguageName } from "@/lib/languages";
 import { useSignOut, useAuth } from "@/hooks/use-auth";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const historyQuery = queryOptions({ queryKey: ["history"], queryFn: () => getHistory() });
 const profileQuery = queryOptions({ queryKey: ["profile"], queryFn: () => getProfile() });
