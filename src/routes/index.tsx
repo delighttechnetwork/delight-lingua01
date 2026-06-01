@@ -26,21 +26,21 @@ function Landing() {
       </header>
 
       <main>
-        <section className="max-w-4xl mx-auto px-6 pt-24 pb-20 text-center">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-xs font-semibold text-brand uppercase tracking-wider mb-8">
             <Sparkles className="size-3" /> AI-powered translation
           </div>
-          <h1 className="font-display text-6xl md:text-7xl text-slate-900 leading-[1.05] tracking-tight text-balance">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl text-slate-900 leading-[1.05] tracking-tight text-balance">
             Translate <span className="italic text-brand">anything</span>,<br />in any language.
           </h1>
-          <p className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto text-pretty leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto text-pretty leading-relaxed">
             Type, speak, or snap a photo. Delight Lingua turns words across 50+ languages with natural, context-aware accuracy.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <Link to="/signup" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors">
+          <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+            <Link to="/signup" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors">
               Start translating free <ArrowRight className="size-4" />
             </Link>
-            <Link to="/pricing" className="px-6 py-3 rounded-full border border-border bg-background text-sm font-medium hover:bg-accent transition-colors">
+            <Link to="/pricing" className="px-6 py-3 rounded-full border border-border bg-background text-sm font-medium hover:bg-accent transition-colors text-center">
               See pricing
             </Link>
           </div>
