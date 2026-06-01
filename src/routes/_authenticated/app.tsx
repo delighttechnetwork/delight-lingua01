@@ -129,82 +129,102 @@ function AppPage() {
   const recent = history?.translations.filter((t: any) => !t.is_favorite).slice(0, 8) ?? [];
   const favorites = history?.translations.filter((t: any) => t.is_favorite).slice(0, 8) ?? [];
 
-  return (
-    <div className="flex h-screen bg-ui-bg font-sans text-slate-900">
-      {/* Sidebar */}
-      <aside className="w-80 border-r border-border bg-background flex flex-col">
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-          <Link to="/" className="font-display italic text-2xl text-brand">Delight Lingua</Link>
-          <div className="size-8 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center">
-            <div className="size-2 rounded-full bg-brand" />
+  const sidebar = (
+    <>
+      <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+        <Link to="/" className="font-display italic text-2xl text-brand">Delight Lingua</Link>
+        <div className="size-8 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center">
+          <div className="size-2 rounded-full bg-brand" />
+        </div>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+        <div>
+          <h3 className="px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-3">Recent History</h3>
+          <div className="space-y-1">
+            {recent.length === 0 && <p className="px-3 text-sm text-slate-400">No translations yet.</p>}
+            {recent.map((t: any) => (
+              <button
+                key={t.id}
+                onClick={() => onHistoryClick(t)}
+                className={`group relative w-full text-left px-3 py-2.5 rounded-lg transition-colors ${lastId === t.id ? "bg-slate-50 border border-slate-100" : "hover:bg-slate-50"}`}
+              >
+                <p className="text-xs font-medium text-slate-500 mb-0.5">
+                  {getLanguageName(t.source_lang)} → {getLanguageName(t.target_lang)}
+                </p>
+                <p className="text-sm text-slate-800 line-clamp-1 pr-6">{t.source_text}</p>
+                <span onClick={(e) => onDelete(t.id, e)} className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-slate-200 text-slate-400 cursor-pointer">
+                  <Trash2 className="size-3" />
+                </span>
+              </button>
+            ))}
           </div>
         </div>
 
-        <nav className="flex-1 overflow-y-auto p-4 space-y-6">
-          <div>
-            <h3 className="px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-3">Recent History</h3>
-            <div className="space-y-1">
-              {recent.length === 0 && <p className="px-3 text-sm text-slate-400">No translations yet.</p>}
-              {recent.map((t: any) => (
-                <button
-                  key={t.id}
-                  onClick={() => onHistoryClick(t)}
-                  className={`group relative w-full text-left px-3 py-2.5 rounded-lg transition-colors ${lastId === t.id ? "bg-slate-50 border border-slate-100" : "hover:bg-slate-50"}`}
-                >
-                  <p className="text-xs font-medium text-slate-500 mb-0.5">
-                    {getLanguageName(t.source_lang)} → {getLanguageName(t.target_lang)}
-                  </p>
-                  <p className="text-sm text-slate-800 line-clamp-1 pr-6">{t.source_text}</p>
-                  <span onClick={(e) => onDelete(t.id, e)} className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-slate-200 text-slate-400 cursor-pointer">
-                    <Trash2 className="size-3" />
-                  </span>
-                </button>
-              ))}
-            </div>
+        <div>
+          <h3 className="px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-3">Saved Phrases</h3>
+          <div className="space-y-1">
+            {favorites.length === 0 && <p className="px-3 text-sm text-slate-400">No favorites yet.</p>}
+            {favorites.map((t: any) => (
+              <button
+                key={t.id}
+                onClick={() => onHistoryClick(t)}
+                className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-3"
+              >
+                <div className="size-1.5 rounded-full bg-amber-400 shrink-0" />
+                <span className="text-sm text-slate-600 line-clamp-1">{t.source_text}</span>
+              </button>
+            ))}
           </div>
+        </div>
+      </nav>
 
-          <div>
-            <h3 className="px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-3">Saved Phrases</h3>
-            <div className="space-y-1">
-              {favorites.length === 0 && <p className="px-3 text-sm text-slate-400">No favorites yet.</p>}
-              {favorites.map((t: any) => (
-                <button
-                  key={t.id}
-                  onClick={() => onHistoryClick(t)}
-                  className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-3"
-                >
-                  <div className="size-1.5 rounded-full bg-amber-400 shrink-0" />
-                  <span className="text-sm text-slate-600 line-clamp-1">{t.source_text}</span>
-                </button>
-              ))}
-            </div>
+      {!profile?.is_premium && (
+        <div className="p-4">
+          <div className="bg-brand/5 rounded-xl p-4 border border-brand/10">
+            <p className="text-xs font-semibold text-brand uppercase tracking-tight mb-1">Pro Account</p>
+            <p className="text-xs text-slate-500 mb-3">
+              {profile?.daily_count ?? 0} / {profile?.daily_limit ?? 500} translations used today.
+            </p>
+            <Link to="/pricing" className="block text-center w-full py-2 bg-brand text-white text-xs font-medium rounded-lg hover:opacity-90 transition-all">
+              Upgrade Now
+            </Link>
           </div>
-        </nav>
+        </div>
+      )}
+    </>
+  );
 
-        {!profile?.is_premium && (
-          <div className="p-4">
-            <div className="bg-brand/5 rounded-xl p-4 border border-brand/10">
-              <p className="text-xs font-semibold text-brand uppercase tracking-tight mb-1">Pro Account</p>
-              <p className="text-xs text-slate-500 mb-3">
-                {profile?.daily_count ?? 0} / {profile?.daily_limit ?? 500} translations used today.
-              </p>
-              <Link to="/pricing" className="block text-center w-full py-2 bg-brand text-white text-xs font-medium rounded-lg hover:opacity-90 transition-all">
-                Upgrade Now
-              </Link>
-            </div>
-          </div>
-        )}
+  return (
+    <div className="flex h-screen bg-ui-bg font-sans text-slate-900">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex w-80 border-r border-border bg-background flex-col shrink-0">
+        {sidebar}
       </aside>
 
       {/* Main */}
-      <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-16 border-b border-border bg-background px-8 flex items-center justify-between shrink-0">
-          <nav className="flex items-center gap-1">
-            <button className="px-4 py-1.5 text-sm font-medium rounded-full bg-slate-900 text-white">Translate</button>
-          </nav>
-          <div className="flex items-center gap-4">
+      <main className="flex-1 flex flex-col overflow-hidden min-w-0">
+        <header className="h-16 border-b border-border bg-background px-4 sm:px-6 lg:px-8 flex items-center justify-between shrink-0 gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="lg:hidden size-9 rounded-lg border border-border flex items-center justify-center text-slate-600 hover:bg-accent shrink-0" aria-label="Open menu">
+                  <Menu className="size-4" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-80 flex flex-col bg-background">
+                <SheetTitle className="sr-only">Navigation</SheetTitle>
+                {sidebar}
+              </SheetContent>
+            </Sheet>
+            <Link to="/" className="lg:hidden font-display italic text-xl text-brand truncate">Delight Lingua</Link>
+            <nav className="hidden lg:flex items-center gap-1">
+              <button className="px-4 py-1.5 text-sm font-medium rounded-full bg-slate-900 text-white">Translate</button>
+            </nav>
+          </div>
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button onClick={handleLogout} className="text-sm font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1.5">
-              <LogOut className="size-4" /> Sign out
+              <LogOut className="size-4" /> <span className="hidden sm:inline">Sign out</span>
             </button>
             <div className="size-9 rounded-full bg-slate-200 outline outline-1 -outline-offset-1 outline-black/5 grid place-items-center text-[10px] font-bold text-slate-500">
               {initials}
@@ -212,16 +232,16 @@ function AppPage() {
           </div>
         </header>
 
-        <section className="flex-1 overflow-y-auto p-8">
-          <div className="max-w-5xl mx-auto w-full flex flex-col gap-6">
+        <section className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          <div className="max-w-5xl mx-auto w-full flex flex-col gap-4 sm:gap-6">
             {/* Mode Switcher */}
             <div className="flex justify-center">
-              <div className="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <div className="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200 w-full sm:w-auto">
                 {(["text", "voice", "image"] as Mode[]).map((m) => (
                   <button
                     key={m}
                     onClick={() => setMode(m)}
-                    className={`px-6 py-2 rounded-lg text-sm font-semibold capitalize transition-colors ${mode === m ? "bg-white shadow-sm text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
+                    className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg text-sm font-semibold capitalize transition-colors ${mode === m ? "bg-white shadow-sm text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
                   >
                     {m}
                   </button>
@@ -230,15 +250,15 @@ function AppPage() {
             </div>
 
             {/* Language Selector */}
-            <div className="grid grid-cols-2 gap-4 items-center">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 items-center">
               <LangSelect value={sourceLang} onChange={setSourceLang} options={LANGUAGES} label="Source" />
               <div className="relative">
                 <button
                   onClick={swapLangs}
                   title="Swap languages"
-                  className="absolute -left-5 top-1/2 -translate-y-1/2 size-8 bg-background border border-border rounded-full flex items-center justify-center text-slate-400 hover:text-brand hover:border-brand transition-colors z-10"
+                  className="absolute -left-4 sm:-left-5 top-1/2 -translate-y-1/2 size-7 sm:size-8 bg-background border border-border rounded-full flex items-center justify-center text-slate-400 hover:text-brand hover:border-brand transition-colors z-10"
                 >
-                  <ArrowLeftRight className="size-3.5" />
+                  <ArrowLeftRight className="size-3 sm:size-3.5" />
                 </button>
                 <LangSelect value={targetLang} onChange={setTargetLang} options={TRANSLATABLE_LANGUAGES} label="Target" />
               </div>
