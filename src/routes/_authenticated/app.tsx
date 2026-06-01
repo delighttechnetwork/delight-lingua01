@@ -16,7 +16,6 @@ import {
 import { LANGUAGES, TRANSLATABLE_LANGUAGES, getLanguageName } from "@/lib/languages";
 import { useSignOut, useAuth } from "@/hooks/use-auth";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const historyQuery = queryOptions({ queryKey: ["history"], queryFn: () => getHistory() });
 const profileQuery = queryOptions({ queryKey: ["profile"], queryFn: () => getProfile() });
